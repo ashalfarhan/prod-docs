@@ -28,8 +28,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - name: 🔧 Setup Pages
-        uses: actions/configure-pages@v3
       - name: 🗑 Restore caches
         uses: actions/cache@v3
         # id: cache-deps
@@ -41,7 +39,12 @@ jobs:
       - name: ⬇️ Install dependencies
         # if: ${{ steps.cache-deps.outputs.cache-hit != 'true' }}
         run: npm ci
+      - name: 🔧 Setup Pages
+        id: setup-pages
+        uses: actions/configure-pages@v3
       - name: 👷 Build
+        env:
+          BASE_NAME: ${{ steps.setup-pages.outputs.base_path }}
         run: npm run docs:build
       - name: 📦 Upload assets
         if: github.ref == 'refs/heads/main'
