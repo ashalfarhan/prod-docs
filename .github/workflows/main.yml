@@ -56,6 +56,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     name: 🌍 Deploy Documentation
     runs-on: ubuntu-latest
+    environment: github-pages
 
     steps:
       - name: 🚀 Deploy to Github Pages
