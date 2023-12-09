@@ -1,0 +1,60 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+
+env:
+  NODE_VERSION: 18.17
+  CACHE_VERSION: v1
+
+jobs:
+  build-docs:
+    name: 🛠️ Build Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v3
+      - name: 🐢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - name: 🔧 Setup Pages
+        uses: actions/configure-pages@v3
+      - name: 🗑 Restore caches
+        uses: actions/cache@v3
+        # id: cache-deps
+        with:
+          path: node_modules
+          key: npm-${{ runner.os }}-${{ env.CACHE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-${{ env.CACHE_VERSION }}-
+      - name: ⬇️ Install dependencies
+        # if: ${{ steps.cache-deps.outputs.cache-hit != 'true' }}
+        run: npm ci
+      - name: 👷 Build
+        run: npm run docs:build
+      - name: 📦 Upload assets
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/.vitepress/dist
+  deploy-docs:
+    needs: build-docs
+    if: github.ref == 'refs/heads/main'
+    name: 🌍 Deploy Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 Deploy to Github Pages
+        uses: actions/deploy-pages@v2
+        id: deployment
