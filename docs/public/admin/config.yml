@@ -23,8 +23,8 @@ collections:
     identifier_field: 'title'
     summary: '{{title}} - {{slug}}'
     filter:
-      - field: layout
-        value: doc
+      field: 'layout'
+      value: 'doc'
     fields:
       - name: 'layout'
         label: 'Layout'
