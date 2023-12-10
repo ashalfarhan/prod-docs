@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: Media Content
 description: Documentation with media content like an image.
 ---

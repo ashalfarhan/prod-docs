@@ -22,7 +22,15 @@ collections:
     slug: '{{slug}}'
     identifier_field: 'title'
     summary: '{{title}} - {{slug}}'
+    filter:
+      - field: layout
+        value: doc
     fields:
+      - name: 'layout'
+        label: 'Layout'
+        widget: 'hidden'
+        default: 'doc'
+        hint: 'Markdown Layout'
       - name: 'title'
         label: 'Title'
         widget: 'string'
