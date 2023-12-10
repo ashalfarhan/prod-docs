@@ -145,3 +145,7 @@ dist
 
 # Vitepress
 cache/
+
+# Wrangler
+.wrangler
+.dev.vars

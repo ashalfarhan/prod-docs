@@ -5,6 +5,8 @@ on:
     branches:
       - main
     pull_request:
+    paths:
+      - 'docs/**'
 
 permissions:
   contents: read
@@ -27,15 +29,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: npm
+          cache: 'npm'
       - name: 🗑 Restore caches
         uses: actions/cache@v3
         # id: cache-deps
         with:
           path: node_modules
           key: npm-${{ runner.os }}-${{ env.CACHE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-${{ env.CACHE_VERSION }}-
+          restore-keys: npm-${{ runner.os }}-${{ env.CACHE_VERSION }}-
       - name: ⬇️ Install dependencies
         # if: ${{ steps.cache-deps.outputs.cache-hit != 'true' }}
         run: npm ci
