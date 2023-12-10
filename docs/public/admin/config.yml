@@ -21,7 +21,9 @@ collections:
     delete: false
     slug: '{{slug}}'
     identifier_field: 'title'
-    summary: '{{title}} - {{slug}}'
+    summary: '{{title}} | Last updated by {{commit_author}} on {{commit_date}}'
+    nested:
+      depth: 4
     filter:
       field: 'layout'
       value: 'doc'
