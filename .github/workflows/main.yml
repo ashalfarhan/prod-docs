@@ -32,13 +32,13 @@ jobs:
           cache: 'npm'
       - name: 🗑 Restore caches
         uses: actions/cache@v3
-        # id: cache-deps
+        id: cache-deps
         with:
           path: node_modules
           key: npm-${{ runner.os }}-${{ env.CACHE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: npm-${{ runner.os }}-${{ env.CACHE_VERSION }}-
       - name: ⬇️ Install dependencies
-        # if: ${{ steps.cache-deps.outputs.cache-hit != 'true' }}
+        if: ${{ steps.cache-deps.outputs.cache-hit != 'true' }}
         run: npm ci
       - name: 🔧 Setup Pages
         id: setup-pages
