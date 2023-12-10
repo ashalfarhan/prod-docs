@@ -73,7 +73,7 @@ app.get('/callback', async c => {
       renderBody('success', { provider: 'github', token: res.access_token })
     );
   } catch (error) {
-    return c.html(renderBody('error', error));
+    return c.html(renderBody('error', { provider: 'github', token: '' }));
   }
 });
 
