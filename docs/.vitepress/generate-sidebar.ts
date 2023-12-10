@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
+import { DefaultTheme } from 'vitepress';
 
 const DIRECTORY = 'docs';
 const IGNORE_LIST = ['.vitepress', 'images', 'public'];
@@ -20,24 +21,9 @@ function getTitleFromFile(file: string) {
   }
 }
 
-// function getTitleFromDirectory(directory: string, name: string) {
-//   const indexFile = join(directory, 'index.md');
-//   if (existsSync(indexFile)) return getTitleFromFile(indexFile)!;
-//   console.log({ name, directory });
-//   const cleanSlug = name.replace(/[_-]/g, ' ');
-//   const text = cleanSlug
-//     .split(' ')
-//     // Capitalize
-//     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-//     .join(' ');
-//   return text;
-// }
-
-type SidebarItem = { text: string; link?: string; items?: SidebarItem[] };
-
 export function getEntries(base: string) {
   const entries = readdirSync(join(DIRECTORY, base));
-  const result: SidebarItem[] = [];
+  const result: DefaultTheme.SidebarItem[] = [];
   for (let i = 0; i < entries.length; i++) {
     const fullPath = join(DIRECTORY, base, entries[i]);
     if (base === '' && entries[i] === 'index.md') continue;
@@ -51,7 +37,7 @@ export function getEntries(base: string) {
       let link: string | undefined;
       if (existsSync(indexFile)) {
         text = getTitleFromFile(indexFile)!;
-        link = '/' + join(base, entries[i]) + "/";
+        link = '/' + join(base, entries[i]) + '/';
       } else {
         const cleanSlug = entries[i].replace(/[_-]/g, ' ');
         text = cleanSlug
@@ -82,6 +68,7 @@ export function getEntries(base: string) {
   return result.sort((a, b) => {
     if (a.items && !b.items) return 1;
     if (!a.items && b.items) return -1;
+    if (!a.text || !b.text) return 0;
     return a.text < b.text ? -1 : a.text > b.text ? 1 : 0;
   });
 }
