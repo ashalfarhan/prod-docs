@@ -21,7 +21,7 @@ collections:
     delete: false
     slug: '{{slug}}'
     identifier_field: 'title'
-    summary: '{{title}} | Last updated by {{commit_author}} on {{commit_date}}'
+    summary: "{{title}} | Last updated by {{commit_author}} on {{commit_date | date('DD-MM-YYYY')}}"
     meta:
       path:
         label: 'Path'
