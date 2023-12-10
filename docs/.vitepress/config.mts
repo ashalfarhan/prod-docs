@@ -9,7 +9,7 @@ const sidebar = getEntries('');
 export default defineConfig({
   title: 'My Product Documentation',
   description: 'A VitePress Site',
-  base: process.env.BASE_NAME || '/prod-docs/',
+  base: process.env.BASE_NAME,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config#outline
     outline: 'deep',
@@ -22,16 +22,15 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/ashalfarhan' }],
   },
   buildEnd(siteConfig) {
-    const assetsDir = join(__dirname, 'dist', 'assets');
-    let cssFile = readdirSync(assetsDir).find(f => f.endsWith('.css'));
-    if (!cssFile) throw new Error('Cannot find css file');
+    const assetsDir = join(siteConfig.themeDir, 'styles');
+    const themeContent = readdirSync(assetsDir)
+      .filter(f => f.endsWith('.css'))
+      .map(f => readFileSync(join(assetsDir, f), { encoding: 'utf8' }))
+      .join('\n');
     if (siteConfig.userConfig.base) {
-      cssFile = join(siteConfig.userConfig.base, 'assets', cssFile);
+      const cssFile = join(__dirname, 'dist', 'admin', 'styles.css');
+      writeFileSync(cssFile, themeContent, { encoding: 'utf8' });
+      console.log('Done write to admin/styles.css');
     }
-    const cmsPage = join(__dirname, 'dist', 'admin', 'index.html');
-    const file = readFileSync(cmsPage, { encoding: 'utf8' });
-    const rewrotedFile = file.replace('{{css}}', cssFile);
-    writeFileSync(cmsPage, rewrotedFile, { encoding: 'utf8' });
-    console.log('Done rewrote CMS Page');
   },
 });
