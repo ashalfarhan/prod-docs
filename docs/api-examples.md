@@ -2,7 +2,6 @@
 layout: doc
 title: Runtime API Examples
 description: This page demonstrates usage of some of the runtime APIs provided by VitePress.
-outline: deep
 ---
 
 # Runtime API Examples

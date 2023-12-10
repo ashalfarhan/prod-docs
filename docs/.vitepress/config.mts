@@ -1,4 +1,7 @@
 import { defineConfig } from 'vitepress';
+import { getEntries } from './generate-sidebar';
+
+const sidebar = getEntries('');
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,21 +9,14 @@ export default defineConfig({
   description: 'A VitePress Site',
   base: process.env.BASE_NAME,
   themeConfig: {
+    // https://vitepress.dev/reference/default-theme-config#outline
+    outline: 'deep',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Examples', link: '/markdown-examples' },
     ],
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
-          { text: 'Media Content', link: '/media-content' },
-        ],
-      },
-    ],
+    sidebar,
     socialLinks: [{ icon: 'github', link: 'https://github.com/ashalfarhan' }],
   },
 });
