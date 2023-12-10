@@ -21,6 +21,7 @@ collections:
     delete: false
     slug: '{{slug}}'
     identifier_field: 'title'
+    summary: '{{title}} - {{slug}}'
     fields:
       - name: 'title'
         label: 'Title'
