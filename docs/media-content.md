@@ -1,3 +1,8 @@
+---
+title: Media Content
+description: Documentation with media content like an image.
+---
+
 # Media Content
 
 ## Images
