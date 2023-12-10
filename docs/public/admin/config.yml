@@ -42,12 +42,18 @@ collections:
       - name: 'navbar'
         label: 'Show navbar'
         widget: 'boolean'
+        required: false
+        default: true
       - name: 'sidebar'
         label: 'Show sidebar'
         widget: 'boolean'
+        required: false
+        default: true
       - name: 'footer'
         label: 'Show footer'
         widget: 'boolean'
+        required: false
+        default: true
       - name: 'body'
         label: 'Body'
         widget: 'markdown'
