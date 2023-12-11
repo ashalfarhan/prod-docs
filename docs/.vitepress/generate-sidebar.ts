@@ -32,9 +32,9 @@ export function getEntries(base: string) {
         continue;
       }
       const fullDir = join(DIRECTORY, base, entries[i]);
-      const indexFile = join(fullDir, 'index.md');
       let text: string;
       let link: string | undefined;
+      const indexFile = join(fullDir, 'index.md');
       if (existsSync(indexFile)) {
         text = getTitleFromFile(indexFile)!;
         link = '/' + join(base, entries[i]) + '/';
@@ -48,7 +48,7 @@ export function getEntries(base: string) {
       }
       result.push({
         text,
-        items: getEntries(entries[i]),
+        items: getEntries(join(base, entries[i])),
         link,
       });
       continue;
