@@ -3,20 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "wrangler dev --port 8080",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20231121.0",
     "@types/node": "^20.10.4",
     "typescript": "^5.3.3",
-    "vitepress": "^1.0.0-rc.31",
-    "wrangler": "^3.19.0"
-  },
-  "dependencies": {
-    "hono": "^3.11.4",
-    "nanoid": "^5.0.4"
+    "vitepress": "^1.0.0-rc.31"
   }
 }
+
