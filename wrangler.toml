@@ -1,7 +1,0 @@
-name = "prod-docs-oauth"
-main = "src/index.ts"
-compatibility_date = "2023-10-16"
-
-[vars]
-OAUTH_SCOPES="repo,user"
-OAUTH_CLIENT_ID="86aa7fbc5ac1f132b4cd"
