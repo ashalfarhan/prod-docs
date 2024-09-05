@@ -2,7 +2,7 @@ backend:
   name: github
   repo: ashalfarhan/prod-docs
   branch: main
-  base_url: https://prod-docs-oauth.ashalfarhan8.workers.dev
+  base_url: https://decap-cms-cloudflare.haans.workers.dev
 
 media_folder: 'docs/public/media'
 
